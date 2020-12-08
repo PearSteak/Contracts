@@ -6,10 +6,10 @@ contract SalesContract {
     event bought(address sender, uint amount);
     
     address payable _owner;
-    address _pear;
-    address _steak;
+    address private _pear;
+    address private _steak;
     
-    bool _stopped = false;
+    bool private _stopped = false;
     
     constructor () public {
         _owner = tx.origin;
@@ -54,5 +54,13 @@ contract SalesContract {
     function stopSaled(bool stopped_) public {
         require(msg.sender == _owner, "Only owner can stop sales!");
         _stopped = stopped_;
+    }
+        
+    /* Changes the owner of the token
+     *
+     */
+    function setOwner(address payable owner_) public {
+        require(msg.sender == _owner, "Only owner can set owner!");
+        _owner = owner_;
     }
 }
