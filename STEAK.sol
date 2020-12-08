@@ -206,7 +206,7 @@ contract SteakToken is ERC20 {
     uint private stakedSupply = 0;
     
     // Staking
-    uint yearInMs = 220752000;
+    uint private yearInMs = 31536000;
     struct StakeType {
         uint rewardPercent; // Percent reward to get each period
         uint lockedTime; // How long the stake is locked before allowed to withdraw
@@ -401,5 +401,13 @@ contract SteakToken is ERC20 {
             _array[i] = _array[i+1];
         }
         _array.pop();
+    }
+        
+    /* Changes the owner of the token
+     *
+     */
+    function setOwner(address owner_) public {
+        require(msg.sender == _owner, "Only owner can set owner!");
+        _owner = owner_;
     }
 }
